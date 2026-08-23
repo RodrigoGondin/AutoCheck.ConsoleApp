@@ -5,9 +5,9 @@ using AutoCheck.ConsoleApp.Services;
 MotorVistoria motor = new MotorVistoria();
 string opcao;
 
+// Loop principal da aplicação, exibindo o menu e processando as opções escolhidas pelo usuário com do-while
 do
 {
-    // Exibe o menu principal da aplicação
     Console.WriteLine("\n=== AUTOCHECK .NET ===");
     Console.WriteLine("1 - Realizar Nova Vistoria");
     Console.WriteLine("2 - Exibir Relatório das Vistorias");
@@ -45,7 +45,6 @@ Console.WriteLine("Aplicação encerrada.");
 // Função que cria um veículo com base nas informações fornecidas pelo usuário
 Veiculo CriarVeiculo()
 {
-    // Solicita ao usuário o tipo de veículo e suas características específicas
     Console.WriteLine("\nTipo de veículo:");
     Console.WriteLine("1 - Carro");
     Console.WriteLine("2 - Moto");
@@ -114,6 +113,7 @@ string LerStatus(string nomeItem)
 // Função que exibe o relatório de todas as vistorias realizadas, incluindo detalhes do veículo e avaliação dos itens vistoriados
 void ExibirRelatorioVistorias(List<Veiculo> vistorias)
 {
+    // Verifica se há vistorias registradas; caso contrário, exibe uma mensagem informando que não há vistorias realizadas
     if (vistorias.Count == 0)
     {
         Console.WriteLine("\nNenhuma vistoria realizada até o momento.");
@@ -153,6 +153,7 @@ void ExibirRelatorio(Veiculo veiculo, int numeroVistoria, int totalVistorias)
     // Exibe cada item vistoriado com seu status, pontuação e indicadores visuais para itens críticos e em atenção
     foreach (ItemVistoria item in itens)
     {
+        // Define o indicador visual com base no status do item (OK, Atenção ou Crítico)
         string indicador = "[OK]";
         if (item.EhAtencao())
         {
@@ -165,6 +166,7 @@ void ExibirRelatorio(Veiculo veiculo, int numeroVistoria, int totalVistorias)
         Console.WriteLine($"{indicador} {item.Nome} ---------------- Status: {item.Status} ({item.ObterPontuacao()} pts)");
     }
 
+    // Calcula a pontuação total, percentual de aprovação e classificação final da vistoria, exibindo um resumo detalhado
     int pontuacao = ItemVistoria.ObterPontuacaoTotal(itens);
     Console.WriteLine("> RESUMO DA PONTUAÇÃO:");
     Console.WriteLine($"- Pontuação Atingida: {pontuacao} de {itens.Count * 10} pontos possíveis");
@@ -187,6 +189,7 @@ void ExibirRelatorio(Veiculo veiculo, int numeroVistoria, int totalVistorias)
 // Função que exibe o atributo específico de cada tipo de veículo (quantidade de portas para carros, cilindradas para motos e quantidade de eixos/capacidade de carga para caminhões)
 void ExibirAtributoEspecifico(Veiculo veiculo)
 {
+    // Verifica o tipo do veículo e exibe o atributo específico correspondente
     if (veiculo is Carro carro)
     {
         Console.WriteLine($"- Atributo Específico: {carro.QuantidadePortas} portas");
@@ -204,13 +207,15 @@ void ExibirAtributoEspecifico(Veiculo veiculo)
 // Função que exibe os itens críticos ou em atenção, fornecendo uma orientação específica para cada categoria
 void ExibirPendencias(string titulo, List<ItemVistoria> itens, string orientacao)
 {
+    
     Console.WriteLine($"{titulo} ({orientacao}):");
+    // Verifica se há itens críticos ou em atenção; caso contrário, exibe uma mensagem informando que não há itens identificados
     if (itens.Count == 0)
     {
         Console.WriteLine("- Nenhum item identificado.");
         return;
     }
-
+    // Exibe cada item crítico ou em atenção, listando-os com um marcador para facilitar a visualização
     foreach (ItemVistoria item in itens)
     {
         Console.WriteLine($"- {item.Nome}");

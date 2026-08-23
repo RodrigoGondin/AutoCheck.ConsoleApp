@@ -7,7 +7,7 @@ namespace AutoCheck.ConsoleApp
 		public string Nome { get; set; }
 		public string Status { get; set; }
 
-        // Construtor da classe ItemVistoria
+        // Método que verifica se o item está crítico
 		public bool EhCritico()
 		{
 			return this.Status == "Ruim";
