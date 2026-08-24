@@ -70,14 +70,14 @@ namespace AutoCheck.ConsoleApp
 			double percentual = ObterPercentualAprovacao(itens);
 			if (percentual >= 90)
 			{
-				return "APROVADO COM EXCELÊNCIA";
+				return "APROVADO COM EXCELÊNCIA. LIBERADO";
 			}
 			else if (percentual >= 60)
 			{
-				return "APROVADO COM APONTAMENTOS";
+				return "APROVADO COM APONTAMENTOS. EXIGE DESCONTO NA COMPRA PARA REPARO POSTERIOR";
 			}
 
-			return "REPROVADO NA VISTORIA";
+			return "REPROVADO NA VISTORIA. VEICULO RECUSADO PARA COMPRA";
 		}
 
         // Método que obtém os itens críticos (status "Ruim") de uma lista de itens vistoriados
